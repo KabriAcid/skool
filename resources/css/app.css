@@ -1,396 +1,174 @@
-@import "tailwindcss";
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-/* Ginto Font Family */
+/* Ginto Font Face */
 @font-face {
-    font-family: "Ginto";
-    src: url("../fonts/Ginto-Regular.woff2") format("woff2"),
-         url("../fonts/Ginto-Regular.woff") format("woff");
+    font-family: 'Ginto';
+    src:
+        url('../fonts/Ginto-Regular.woff2') format('woff2'),
+        url('../fonts/Ginto-Regular.woff') format('woff');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Ginto";
-    src: url("../fonts/Ginto-Medium.woff2") format("woff2"),
-         url("../fonts/Ginto-Medium.woff") format("woff");
+    font-family: 'Ginto';
+    src:
+        url('../fonts/Ginto-Medium.woff2') format('woff2'),
+        url('../fonts/Ginto-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 
 @font-face {
-    font-family: "Ginto";
-    src: url("../fonts/Ginto-Bold.woff2") format("woff2"),
-         url("../fonts/Ginto-Bold.woff") format("woff");
+    font-family: 'Ginto';
+    src:
+        url('../fonts/Ginto-Bold.woff2') format('woff2'),
+        url('../fonts/Ginto-Bold.woff') format('woff');
     font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 
-@theme {
-    --font-ginto: "Ginto", system-ui, -apple-system, sans-serif;
-    
-    --color-primary-500: #0ea5e9;
-    --color-primary-600: #0284c7;
-    --color-secondary-500: #d946ef;
-    --color-neutral-200: #e5e7eb;
-    --color-neutral-300: #d1d5db;
-    --color-neutral-400: #9ca3af;
-    --color-neutral-600: #4b5563;
-    --color-neutral-700: #374151;
-    --color-spiritual-200: #e0f2fe;
-    --color-spiritual-300: #bae6fd;
-    --color-spiritual-400: #7dd3fc;
-    --color-spiritual-500: #38bdf8;
-    --color-spiritual-600: #0ea5e9;
-    --color-spiritual-700: #0284c7;
-    --color-spiritual-900: #0c4a6e;
-    --color-error-50: #fef2f2;
-    --color-error-200: #fecaca;
-    --color-error-600: #dc2626;
-    --color-success-50: #f0fdf4;
-    --color-success-200: #bbf7d0;
-    --color-success-600: #16a34a;
+/* Base Styles */
+* {
+    box-sizing: border-box;
 }
 
-@layer base {
-    * {
-        box-sizing: border-box;
-    }
+html {
+    scroll-behavior: smooth;
+}
 
-    html {
-        scroll-behavior: smooth;
-    }
+body {
+    font-family:
+        'Ginto',
+        system-ui,
+        -apple-system,
+        sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    min-height: 100vh;
+}
 
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Utility Classes */
+.text-gradient {
+    background: linear-gradient(135deg, #0ea5e9, #d946ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+}
+
+/* Islamic Pattern Background */
+.islamic-bg {
+    background-image:
+        radial-gradient(
+            circle at 25% 25%,
+            rgba(14, 165, 233, 0.1) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 75% 75%,
+            rgba(217, 70, 239, 0.1) 0%,
+            transparent 50%
+        );
+}
+
+/* Animation Classes */
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Button Styles */
+.btn-primary {
+    @apply rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-3 font-medium text-white shadow-medium transition-all duration-300 hover:scale-105 hover:shadow-strong active:scale-95;
+}
+
+.btn-secondary {
+    @apply rounded-xl border border-spiritual-200 bg-white px-6 py-3 font-medium text-spiritual-700 shadow-soft transition-all duration-300 hover:border-spiritual-300 hover:shadow-medium;
+}
+
+.btn-ghost {
+    @apply rounded-xl px-6 py-3 font-medium text-spiritual-600 transition-all duration-300 hover:bg-white/50;
+}
+
+/* Input Styles */
+.input-field {
+    @apply w-full rounded-xl border border-spiritual-200 bg-white/80 px-4 py-3 placeholder-spiritual-400 backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
+}
+
+/* Card Styles */
+.quiz-card {
+    @apply card-hover rounded-2xl border border-white/20 bg-white/90 p-6 shadow-soft backdrop-blur-sm;
+}
+
+/* Progress Bar */
+.progress-bar {
+    @apply h-2 w-full overflow-hidden rounded-full bg-spiritual-200;
+}
+
+.progress-fill {
+    @apply h-full rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 transition-all duration-500 ease-out;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
     body {
-        font-family: var(--font-ginto);
-        line-height: 1.6;
-        color: #1e293b;
-        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-        min-height: 100vh;
-    }
-
-    /* Remove default focus outlines */
-    input:focus,
-    textarea:focus,
-    select:focus,
-    button:focus {
-        outline: none !important;
-        box-shadow: none;
-    }
-
-    input:focus-visible,
-    textarea:focus-visible,
-    select:focus-visible {
-        outline: none !important;
-    }
-
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-        background: #f1f5f9;
-    }
-
-    ::-webkit-scrollbar-thumb {
-        background: #cbd5e1;
-        border-radius: 3px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-        background: #94a3b8;
-    }
-}
-
-@layer components {
-    /* Input Field Styles */
-    .input-field {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        border-radius: 0.75rem;
-        border: 1px solid var(--color-spiritual-200);
-        background-color: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(4px);
-        transition: all 300ms ease;
-        color: var(--color-spiritual-900);
-        font-size: 1rem;
-    }
-
-    .input-field::placeholder {
-        color: var(--color-spiritual-400);
-    }
-
-    .input-field:focus {
-        outline: none;
-        border-color: var(--color-primary-500);
-        box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
-    }
-
-    /* Select field specific styling */
-    select.input-field {
-        appearance: none;
-        background-repeat: no-repeat;
-        background-position: right 0.75rem center;
-        padding-right: 2.5rem;
-        background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%239CA3AF%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.293%207.293a1%201%200%011.414%200L10%2010.586l3.293-3.293a1%201%200%011.414%201.414l-4%204a1%201%200%01-1.414%200l-4-4a1%201%200%010-1.414z%22%20clip-rule%3D%22evenodd%22/%3E%3C/svg%3E');
-    }
-
-    /* Button Styles */
-    .btn-primary {
-        color: white;
-        font-weight: 500;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.75rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        transition: all 300ms ease;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        outline: none;
-        border: none;
-        cursor: pointer;
-        background: linear-gradient(to right, var(--color-primary-500), var(--color-primary-600));
-    }
-
-    .btn-primary:hover {
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.15);
-        transform: scale(1.05);
-    }
-
-    .btn-primary:active {
-        transform: scale(0.95);
-    }
-
-    .btn-primary:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px white, 0 0 0 4px rgba(14, 165, 233, 0.5);
-    }
-
-    .btn-primary:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    .btn-secondary {
-        background-color: white;
-        color: var(--color-spiritual-700);
-        font-weight: 500;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.75rem;
-        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08);
-        transition: all 300ms ease;
-        border: 1px solid var(--color-spiritual-200);
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-        border-color: var(--color-spiritual-300);
-    }
-
-    .btn-secondary:focus {
-        outline: none;
-        box-shadow: 0 0 0 2px white, 0 0 0 4px rgba(var(--color-spiritual-500), 0.5);
-    }
-
-    .btn-secondary:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    .btn-ghost {
-        color: var(--color-spiritual-600);
-        font-weight: 500;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.75rem;
-        transition: all 300ms ease;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-    }
-
-    .btn-ghost:hover {
-        background-color: rgba(255, 255, 255, 0.5);
-    }
-
-    /* Card Styles */
-    .card {
-        background-color: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(4px);
-        border-radius: 1.875rem;
-        padding: 2rem;
-        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .card-hover {
-        transition: all 300ms ease;
-    }
-
-    .card-hover:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.2);
+        font-size: 14px;
     }
 
     .quiz-card {
-        background-color: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(4px);
-        border-radius: 0.5rem;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        transition: all 300ms ease;
+        @apply rounded-xl p-4;
     }
 
-    .quiz-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-
-    /* Messages */
-    .error-message {
-        margin-top: 0.25rem;
-        font-size: 0.875rem;
-        color: var(--color-error-600);
-    }
-
-    .success-message {
-        padding: 0.75rem;
-        background-color: var(--color-success-50);
-        border: 1px solid var(--color-success-200);
-        border-radius: 0.75rem;
-        color: var(--color-success-600);
-        font-size: 0.875rem;
-    }
-
-    .error-alert {
-        padding: 0.75rem;
-        background-color: var(--color-error-50);
-        border: 1px solid var(--color-error-200);
-        border-radius: 0.75rem;
-        color: var(--color-error-600);
-        font-size: 0.875rem;
-    }
-
-    /* Progress Bar */
-    .progress-bar {
-        width: 100%;
-        height: 0.5rem;
-        background-color: var(--color-spiritual-200);
-        border-radius: 9999px;
-        overflow: hidden;
-    }
-
-    .progress-fill {
-        height: 100%;
-        border-radius: 9999px;
-        transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
-        background: linear-gradient(to right, var(--color-primary-500), var(--color-secondary-500));
-    }
-
-    /* Mobile Optimizations */
-    @media (max-width: 640px) {
-        .quiz-card {
-            padding: 1rem;
-            border-radius: 0.75rem;
-        }
-
-        .btn-primary,
-        .btn-secondary {
-            padding: 0.75rem 1.25rem;
-            font-size: 0.875rem;
-        }
-    }
-}
-
-@layer utilities {
-    /* Utility Classes */
-    .text-gradient {
-        background: linear-gradient(135deg, var(--color-primary-500), var(--color-secondary-500));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .glass-effect {
-        background: rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-    }
-
-    /* Islamic Pattern Background */
-    .islamic-bg {
-        background-image: radial-gradient(circle at 25% 25%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
-                          radial-gradient(circle at 75% 75%, rgba(217, 70, 239, 0.1) 0%, transparent 50%);
-    }
-
-    /* Animations */
-    .animate-float {
-        animation: float 6s ease-in-out infinite;
-    }
-
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0px);
-        }
-        50% {
-            transform: translateY(-20px);
-        }
-    }
-
-    .animate-fadeIn {
-        animation: fadeIn 0.6s ease-out forwards;
-        opacity: 0;
-    }
-
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* Top Loading Bar */
-    .top-loader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, var(--color-primary-500) 0%, var(--color-secondary-500) 100%);
-        box-shadow: 0 0 10px rgba(14, 165, 233, 0.8);
-        z-index: 9999;
-        transition: width 0.3s ease, opacity 0.3s ease;
-        border-radius: 0 2px 2px 0;
-    }
-
-    .top-loader.hidden {
-        opacity: 0;
-        pointer-events: none;
-    }
-
-    /* Hide scrollbar while keeping functionality */
-    .scrollbar-hide {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* Alpine.js Cloak */
-    [x-cloak] {
-        display: none !important;
+    .btn-primary,
+    .btn-secondary {
+        @apply px-5 py-3 text-sm;
     }
 }
