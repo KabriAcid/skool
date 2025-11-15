@@ -2,13 +2,22 @@
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Laravel\Fortify\Features;
+
+/**
+ * Public routes (guest or authenticated)
+ */
+Route::get('/', function () {
+    return Inertia::render('welcome', [
+        'canRegister' => Features::enabled(Features::registration()),
+    ]);
+})->name('home');
 
 /**
  * Health check / API info endpoint
- * This is the only thing :8000 serves directly
- * All UI is handled by React on :5173
+ * Direct access to :8000 shows server status only
  */
-Route::get('/', function () {
+Route::get('/health', function () {
     return response()->json([
         'status' => 'ok',
         'app' => config('app.name', 'Laravel'),
@@ -19,8 +28,7 @@ Route::get('/', function () {
 })->name('health');
 
 /**
- * All UI routes are now handled by React + Inertia on :5173
- * These routes still exist for Inertia to render pages when accessed from React
+ * Protected routes (authenticated + verified)
  */
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
