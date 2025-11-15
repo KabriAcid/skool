@@ -1,4 +1,3 @@
-/** @type {import('tailwindcss').Config} */
 export default {
     content: [
         './resources/views/**/*.blade.php',
@@ -8,6 +7,7 @@ export default {
         extend: {
             fontFamily: {
                 ginto: ['Ginto', 'system-ui', 'sans-serif'],
+                arabic: ['Amiri', 'serif'],
                 inter: ['Inter', 'system-ui', 'sans-serif'],
             },
             colors: {
@@ -34,6 +34,32 @@ export default {
                     700: '#a21caf',
                     800: '#86198f',
                     900: '#701a75',
+                },
+                islamic: {
+                    50: '#f8fafc',
+                    100: '#f1f5f9',
+                    200: '#e2e8f0',
+                    300: '#cbd5e1',
+                    400: '#94a3b8',
+                    500: '#64748b',
+                    600: '#475569',
+                    700: '#334155',
+                    800: '#1e293b',
+                    900: '#0c1221',
+                    gold: '#d4af37',
+                    emerald: '#50c878',
+                },
+                spiritual: {
+                    50: '#f8fafc',
+                    100: '#f1f5f9',
+                    200: '#e2e8f0',
+                    300: '#cbd5e1',
+                    400: '#94a3b8',
+                    500: '#64748b',
+                    600: '#475569',
+                    700: '#334155',
+                    800: '#1e293b',
+                    900: '#0f172a',
                 },
                 success: {
                     50: '#f0fdf4',
@@ -71,18 +97,13 @@ export default {
                     800: '#991b1b',
                     900: '#7f1d1d',
                 },
-                neutral: {
-                    50: '#f8fafc',
-                    100: '#f1f5f9',
-                    200: '#e2e8f0',
-                    300: '#cbd5e1',
-                    400: '#94a3b8',
-                    500: '#64748b',
-                    600: '#475569',
-                    700: '#334155',
-                    800: '#1e293b',
-                    900: '#0f172a',
-                },
+            },
+            backgroundImage: {
+                'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                'gradient-conic':
+                    'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+                'islamic-pattern':
+                    'url(\'data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23f1f5f9" fill-opacity="0.1"%3E%3Cpath d="M30 30c0-16.569 13.431-30 30-30v60c-16.569 0-30-13.431-30-30z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\')',
             },
             animation: {
                 'fade-in': 'fadeIn 0.5s ease-in-out',
