@@ -125,7 +125,7 @@ const Home: React.FC = () => {
                                 </span>
                             </div>
                             <span className="text-xl font-bold text-spiritual-900">
-                                Examine
+                                Skool
                             </span>
                         </div>
 
@@ -476,11 +476,11 @@ const Home: React.FC = () => {
                             <div className="flex items-center space-x-2">
                                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary-600 to-secondary-500">
                                     <span className="text-sm font-bold text-white">
-                                        E
+                                        S
                                     </span>
                                 </div>
                                 <span className="text-lg font-bold text-white">
-                                    Examine
+                                    Skool
                                 </span>
                             </div>
                             <p className="text-sm">
@@ -607,7 +607,7 @@ const Home: React.FC = () => {
 
                     <div className="border-t border-spiritual-700 pt-8 text-center text-sm">
                         <p>
-                            &copy; {new Date().getFullYear()} Examine. All
+                            &copy; {new Date().getFullYear()} Skool. All
                             rights reserved.
                         </p>
                     </div>
