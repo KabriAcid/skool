@@ -6,10 +6,10 @@
 // HTTP Client
 export { default as axios } from './axios';
 
-// State and LGA selector for Nigerian forms
-export { default as stateCapitalModule } from './state-capital';
+// Note: state-capital.ts runs on DOMContentLoaded automatically
+// No need to import separately - just include in your page
 
-// Note: lottie-player is a large library, import it separately if needed
+// Note: lottie-player.ts is a large library, import it separately if needed
 // import 'lottie-player' when you need it in components
 
 // Re-export cn utility from lib (if needed here)

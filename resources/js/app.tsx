@@ -6,6 +6,11 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { initializeTheme } from './hooks/use-appearance';
 
+// Import utilities
+import './utils/axios'; // Configures global axios with CSRF protection
+import './utils/state-capital'; // Initializes state/LGA selector on DOMContentLoaded
+// Note: lottie-player imported where needed in components
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
