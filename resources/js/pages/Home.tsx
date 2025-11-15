@@ -1,223 +1,620 @@
-import React from 'react';
+import { usePage } from '@inertiajs/react';
 import { motion } from 'framer-motion';
-import { BookOpen, Trophy, Users, Star, ArrowRight, Play } from 'lucide-react';
-import Button from '../components/ui/Button';
-import QuizCard from '../components/QuizCard';
-import { Quiz } from '../types/quiz';
+import {
+    ArrowRight,
+    BadgeCheck,
+    BookOpen,
+    Clock,
+    Play,
+    Star,
+    Trophy,
+    Users,
+} from 'lucide-react';
+import React from 'react';
+
+interface Exam {
+    id: number;
+    title: string;
+    subject: string;
+    description: string;
+    timeLimit: number;
+    difficulty: 'easy' | 'medium' | 'hard';
+    totalPoints: number;
+    questions: number;
+    emoji: string;
+}
 
 const Home: React.FC = () => {
-  // Mock quiz data
-  const featuredQuizzes: Quiz[] = [
-    {
-      id: '1',
-      title: 'Surah Al-Fatiha',
-      description: 'Test your knowledge of the opening chapter of the Quran',
-      questions: [],
-      timeLimit: 300,
-      category: 'quran',
-      difficulty: 'easy',
-      totalPoints: 100,
-    },
-    {
-      id: '2',
-      title: 'Prophets of Islam',
-      description: 'Learn about the messengers mentioned in the Quran',
-      questions: [],
-      timeLimit: 600,
-      category: 'prophets',
-      difficulty: 'medium',
-      totalPoints: 200,
-    },
-    {
-      id: '3',
-      title: 'Islamic History',
-      description: 'Explore the rich history of Islam and early Muslim community',
-      questions: [],
-      timeLimit: 900,
-      category: 'islamic-history',
-      difficulty: 'hard',
-      totalPoints: 300,
-    },
-  ];
+    const { auth } = usePage<any>().props;
 
-  const stats = [
-    { icon: Users, label: 'Active Players', value: '10,000+', color: 'text-primary-600' },
-    { icon: BookOpen, label: 'Quiz Questions', value: '5,000+', color: 'text-secondary-600' },
-    { icon: Trophy, label: 'Completed Quizzes', value: '50,000+', color: 'text-success-600' },
-    { icon: Star, label: 'Average Rating', value: '4.9/5', color: 'text-warning-600' },
-  ];
+    // Mock exam data for featured tests
+    const featuredExams: Exam[] = [
+        {
+            id: 1,
+            title: 'JAMB Mathematics',
+            subject: 'Mathematics',
+            description:
+                'Comprehensive practice test covering all JAMB mathematics topics',
+            timeLimit: 120,
+            difficulty: 'medium',
+            totalPoints: 400,
+            questions: 40,
+            emoji: '🧮',
+        },
+        {
+            id: 2,
+            title: 'WAEC English Language',
+            subject: 'English',
+            description:
+                'Master WAEC English comprehension, grammar, and oral English',
+            timeLimit: 180,
+            difficulty: 'easy',
+            totalPoints: 500,
+            questions: 50,
+            emoji: '📚',
+        },
+        {
+            id: 3,
+            title: 'JAMB Chemistry',
+            subject: 'Chemistry',
+            description:
+                'Practice organic, inorganic, and physical chemistry questions',
+            timeLimit: 120,
+            difficulty: 'hard',
+            totalPoints: 400,
+            questions: 40,
+            emoji: '⚗️',
+        },
+    ];
 
-  const handleStartQuiz = (quiz: Quiz) => {
-    // Navigate to quiz page
-    window.location.href = '/quiz';
-  };
+    const stats = [
+        {
+            icon: Users,
+            label: 'Active Students',
+            value: '10,000+',
+            color: 'text-primary-600',
+        },
+        {
+            icon: BookOpen,
+            label: 'Practice Questions',
+            value: '50,000+',
+            color: 'text-secondary-600',
+        },
+        {
+            icon: BadgeCheck,
+            label: 'Tests Completed',
+            value: '100,000+',
+            color: 'text-success-600',
+        },
+        {
+            icon: Star,
+            label: 'Success Rate',
+            value: '92%',
+            color: 'text-warning-600',
+        },
+    ];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50">
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-16 overflow-hidden">
-        <div className="absolute inset-0 islamic-bg opacity-30" />
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center space-y-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-4"
-            >
-              <h1 className="text-4xl md:text-6xl font-bold text-spiritual-900 leading-tight">
-                Master Your
-                <span className="text-gradient block">Quran Knowledge</span>
-              </h1>
-              <p className="text-lg md:text-xl text-spiritual-600 max-w-3xl mx-auto leading-relaxed">
-                Enhance your understanding of the Holy Quran through interactive quizzes, 
-                compete with fellow Muslims, and track your spiritual learning journey.
-              </p>
-            </motion.div>
+    const getDifficultyColor = (difficulty: string) => {
+        switch (difficulty) {
+            case 'easy':
+                return 'bg-success-100 text-success-600';
+            case 'medium':
+                return 'bg-warning-100 text-warning-600';
+            case 'hard':
+                return 'bg-error-100 text-error-600';
+            default:
+                return 'bg-neutral-100 text-neutral-600';
+        }
+    };
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4"
-            >
-              <Button variant="primary" size="lg" className="group">
-                <Play className="w-5 h-5 mr-2" />
-                Start Learning
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button variant="secondary" size="lg">
-                <Trophy className="w-5 h-5 mr-2" />
-                View Leaderboard
-              </Button>
-            </motion.div>
-          </div>
+    const handleStartExam = (exam: Exam) => {
+        window.location.href = `/exams/${exam.id}`;
+    };
 
-          {/* Hero Illustration */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            className="mt-16 relative"
-          >
-            <div className="w-full max-w-md mx-auto">
-              <div className="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-strong">
-                <div className="text-center space-y-4">
-                  <div className="w-20 h-20 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-2xl mx-auto flex items-center justify-center animate-bounce-gentle">
-                    <BookOpen className="w-10 h-10 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-spiritual-900">Ready to Begin?</h3>
-                  <p className="text-spiritual-600">Choose from hundreds of carefully crafted questions</p>
-                  <div className="flex items-center justify-center space-x-2 text-sm text-spiritual-500">
-                    <Star className="w-4 h-4 text-warning-500" />
-                    <span>Trusted by 10,000+ learners</span>
-                  </div>
+    return (
+        <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-secondary-50">
+            {/* Navigation */}
+            <nav className="fixed left-0 right-0 top-0 z-50 bg-white/90 shadow-soft backdrop-blur-md">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="flex h-16 items-center justify-between">
+                        {/* Logo */}
+                        <div className="flex items-center space-x-2">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary-500 to-secondary-500">
+                                <span className="text-lg font-bold text-white">
+                                    E
+                                </span>
+                            </div>
+                            <span className="text-xl font-bold text-spiritual-900">
+                                Examine
+                            </span>
+                        </div>
+
+                        {/* Navigation Links */}
+                        <div className="hidden items-center space-x-8 md:flex">
+                            <a
+                                href="#featured-exams"
+                                className="text-spiritual-600 transition-colors hover:text-primary-600"
+                            >
+                                Exams
+                            </a>
+                            <a
+                                href="#"
+                                className="text-spiritual-600 transition-colors hover:text-primary-600"
+                            >
+                                About
+                            </a>
+                            <a
+                                href="#"
+                                className="text-spiritual-600 transition-colors hover:text-primary-600"
+                            >
+                                Contact
+                            </a>
+                        </div>
+
+                        {/* Auth Buttons */}
+                        <div className="flex items-center space-x-4">
+                            {auth?.user ? (
+                                <a
+                                    href="/dashboard"
+                                    className="btn-primary text-sm"
+                                >
+                                    Dashboard
+                                </a>
+                            ) : (
+                                <>
+                                    <a
+                                        href="/login"
+                                        className="rounded-xl border border-gray-200 px-4 py-3 text-sm font-semibold text-spiritual-600 transition-colors hover:text-primary-600"
+                                    >
+                                        Sign In
+                                    </a>
+                                    <a
+                                        href="/register"
+                                        className="btn-primary hidden text-sm sm:inline-flex"
+                                    >
+                                        Get Started
+                                    </a>
+                                </>
+                            )}
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+            </nav>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="text-center space-y-2"
-              >
-                <div className={`w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-primary-100 to-secondary-100 flex items-center justify-center ${stat.color}`}>
-                  <stat.icon className="w-6 h-6" />
+            {/* Hero Section */}
+            <section className="relative overflow-hidden px-4 pb-20 pt-32 sm:px-6 lg:px-8">
+                <div className="islamic-bg absolute inset-0 opacity-30" />
+
+                <div className="relative mx-auto max-w-7xl">
+                    <div className="grid items-center gap-12 lg:grid-cols-2">
+                        {/* Hero Content */}
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
+                            className="space-y-8"
+                        >
+                            <div className="inline-block rounded-full bg-primary-100 px-4 py-2 text-sm font-medium text-primary-700">
+                                🎯 AI-Powered Exam Preparation
+                            </div>
+
+                            <h1 className="text-5xl font-bold leading-tight text-spiritual-900 md:text-6xl">
+                                Master Your
+                                <span className="text-gradient block">
+                                    Exam Preparation
+                                </span>
+                            </h1>
+
+                            <p className="max-w-3xl text-lg leading-relaxed text-spiritual-600">
+                                Ace your JAMB, WAEC, and NECO exams with
+                                AI-powered practice tests, compete with peers,
+                                and track your academic progress in real-time.
+                            </p>
+
+                            {/* CTA Buttons */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.8, delay: 0.2 }}
+                                className="flex flex-col items-center justify-start gap-4 sm:flex-row"
+                            >
+                                {auth?.user ? (
+                                    <>
+                                        <a
+                                            href="/dashboard"
+                                            className="btn-primary group inline-flex items-center text-base"
+                                        >
+                                            <Play className="mr-2 h-5 w-5" />
+                                            Start Practicing
+                                            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                        </a>
+                                    </>
+                                ) : (
+                                    <>
+                                        <a
+                                            href="/register?role=student"
+                                            className="btn-primary group inline-flex items-center text-base"
+                                        >
+                                            <Play className="mr-2 h-5 w-5" />
+                                            Start Learning
+                                            <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                                        </a>
+                                    </>
+                                )}
+
+                                <a
+                                    href="#featured-exams"
+                                    className="inline-flex items-center rounded-xl border border-spiritual-200 bg-white px-6 py-3 text-base font-medium text-spiritual-700 shadow-soft transition-all duration-300 hover:border-spiritual-300 hover:shadow-medium"
+                                >
+                                    <Trophy className="mr-2 h-5 w-5" />
+                                    View Leaderboard
+                                </a>
+                            </motion.div>
+                        </motion.div>
+
+                        {/* Hero Illustration */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1, delay: 0.4 }}
+                            className="relative mt-16 hidden lg:block"
+                        >
+                            <div className="mx-auto w-full max-w-md">
+                                <div className="relative rounded-3xl bg-white/90 p-8 shadow-strong backdrop-blur-sm">
+                                    <div className="space-y-4 text-center">
+                                        <div className="mx-auto flex h-20 w-20 animate-bounce-gentle items-center justify-center rounded-2xl bg-gradient-to-br from-primary-500 to-secondary-500">
+                                            <BookOpen className="h-10 w-10 text-white" />
+                                        </div>
+                                        <h3 className="text-xl font-bold text-spiritual-900">
+                                            Ready to Begin?
+                                        </h3>
+                                        <p className="text-spiritual-600">
+                                            Choose from thousands of exam
+                                            questions across all subjects
+                                        </p>
+                                        <div className="flex items-center justify-center space-x-2 text-sm text-spiritual-500">
+                                            <Star className="h-4 w-4 text-warning-500" />
+                                            <span>
+                                                Trusted by 10,000+ students
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
-                <div className="text-2xl font-bold text-spiritual-900">{stat.value}</div>
-                <div className="text-sm text-spiritual-600">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+            </section>
+
+            {/* Stats Section */}
+            <section className="bg-white/50 py-16">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+                        {stats.map((stat, index) => (
+                            <motion.div
+                                key={stat.label}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    duration: 0.6,
+                                    delay: index * 0.1,
+                                }}
+                                className="space-y-2 text-center"
+                            >
+                                <div
+                                    className={`mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary-100 to-secondary-100 ${stat.color}`}
+                                >
+                                    <stat.icon className="h-6 w-6" />
+                                </div>
+                                <div className="text-2xl font-bold text-spiritual-900">
+                                    {stat.value}
+                                </div>
+                                <div className="text-sm text-spiritual-600">
+                                    {stat.label}
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Featured Exams Section */}
+            <section id="featured-exams" className="py-16">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="mb-12 text-center"
+                    >
+                        <h2 className="mb-4 text-4xl font-bold text-spiritual-900">
+                            Featured Mock Exams
+                        </h2>
+                        <p className="mx-auto max-w-2xl text-lg text-spiritual-600">
+                            Start your preparation with these carefully designed
+                            mock tests based on past JAMB, WAEC, and NECO
+                            questions.
+                        </p>
+                    </motion.div>
+
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                        {featuredExams.map((exam, index) => (
+                            <motion.div
+                                key={exam.id}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    duration: 0.6,
+                                    delay: index * 0.1,
+                                }}
+                                className={`card-hover rounded-2xl border border-white/20 bg-white/90 p-6 shadow-soft backdrop-blur-sm`}
+                            >
+                                {/* Card Header */}
+                                <div className="mb-4 flex items-start justify-between">
+                                    <div className="text-4xl">{exam.emoji}</div>
+                                    <span
+                                        className={`rounded-full px-3 py-1 text-xs font-medium ${getDifficultyColor(exam.difficulty)}`}
+                                    >
+                                        {exam.difficulty
+                                            .charAt(0)
+                                            .toUpperCase() +
+                                            exam.difficulty.slice(1)}
+                                    </span>
+                                </div>
+
+                                {/* Card Content */}
+                                <h3 className="mb-2 text-lg font-bold text-spiritual-900 md:text-xl">
+                                    {exam.title}
+                                </h3>
+                                <p className="mb-4 text-sm leading-relaxed text-spiritual-600">
+                                    {exam.description}
+                                </p>
+
+                                {/* Card Meta */}
+                                <div className="mb-4 flex items-center justify-between gap-2 text-sm text-spiritual-500">
+                                    <div className="flex items-center space-x-1">
+                                        <Clock className="h-4 w-4" />
+                                        <span>{exam.timeLimit}m</span>
+                                    </div>
+                                    <div className="flex items-center space-x-1">
+                                        <Star className="h-4 w-4" />
+                                        <span>{exam.totalPoints} pts</span>
+                                    </div>
+                                    <div className="flex items-center space-x-1">
+                                        <Users className="h-4 w-4" />
+                                        <span>{exam.questions}</span>
+                                    </div>
+                                </div>
+
+                                {/* Start Button */}
+                                <button
+                                    onClick={() => handleStartExam(exam)}
+                                    className="btn-primary group inline-flex w-full items-center justify-center text-sm"
+                                >
+                                    <span>Start Exam</span>
+                                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                                </button>
+                            </motion.div>
+                        ))}
+                    </div>
+
+                    {/* View All Button */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        className="mt-12 text-center"
+                    >
+                        <a
+                            href="/exams"
+                            className="inline-flex items-center rounded-xl border border-spiritual-200 bg-white px-6 py-3 text-base font-medium text-spiritual-700 shadow-soft transition-all duration-300 hover:border-spiritual-300 hover:shadow-medium"
+                        >
+                            <span>View All Exams</span>
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                        </a>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* CTA Section */}
+            <section className="bg-gradient-to-r from-primary-600 to-secondary-600 py-16">
+                <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="space-y-6"
+                    >
+                        <h2 className="text-4xl font-bold text-white">
+                            Ready to Ace Your Exams?
+                        </h2>
+                        <p className="mx-auto max-w-2xl text-xl text-primary-100">
+                            Join thousands of Nigerian students preparing for
+                            JAMB, WAEC, and NECO with our AI-powered mock tests.
+                        </p>
+                        <div className="flex flex-col items-center justify-center gap-4 pt-2 sm:flex-row">
+                            {auth?.user ? (
+                                <>
+                                    <a
+                                        href="/dashboard"
+                                        className="inline-flex items-center rounded-xl bg-white px-6 py-3 text-base font-medium text-primary-600 shadow-medium transition-all duration-300 hover:scale-105 hover:bg-primary-50 hover:shadow-strong active:scale-95"
+                                    >
+                                        <Play className="mr-2 h-5 w-5" />
+                                        Start Your First Test
+                                    </a>
+                                </>
+                            ) : (
+                                <>
+                                    <a
+                                        href="/register"
+                                        className="inline-flex items-center rounded-xl bg-white px-6 py-3 text-base font-medium text-primary-600 shadow-medium transition-all duration-300 hover:scale-105 hover:bg-primary-50 hover:shadow-strong active:scale-95"
+                                    >
+                                        <Play className="mr-2 h-5 w-5" />
+                                        Start Your First Test
+                                    </a>
+                                </>
+                            )}
+                            <a
+                                href="#featured-exams"
+                                className="inline-flex items-center rounded-xl border-2 border-white px-6 py-3 text-base font-medium text-white transition-all duration-300 hover:bg-white/20"
+                            >
+                                Learn More
+                            </a>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
+            {/* Footer */}
+            <footer className="bg-spiritual-900 py-12 text-spiritual-300">
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="mb-8 grid grid-cols-2 gap-8 md:grid-cols-4">
+                        {/* Brand */}
+                        <div className="col-span-2 space-y-4 md:col-span-1">
+                            <div className="flex items-center space-x-2">
+                                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary-600 to-secondary-500">
+                                    <span className="text-sm font-bold text-white">
+                                        E
+                                    </span>
+                                </div>
+                                <span className="text-lg font-bold text-white">
+                                    Examine
+                                </span>
+                            </div>
+                            <p className="text-sm">
+                                Your trusted platform for JAMB, WAEC, and NECO
+                                exam preparation.
+                            </p>
+                        </div>
+
+                        {/* Quick Links */}
+                        <div>
+                            <h4 className="mb-4 text-sm font-semibold text-white">
+                                Quick Links
+                            </h4>
+                            <ul className="space-y-2 text-sm">
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#featured-exams"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        Exams
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        About Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        Contact
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Resources */}
+                        <div>
+                            <h4 className="mb-4 text-sm font-semibold text-white">
+                                Resources
+                            </h4>
+                            <ul className="space-y-2 text-sm">
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        Study Guides
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        Past Questions
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        Blog
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        FAQs
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Legal */}
+                        <div>
+                            <h4 className="mb-4 text-sm font-semibold text-white">
+                                Legal
+                            </h4>
+                            <ul className="space-y-2 text-sm">
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        Privacy Policy
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        Terms of Service
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="transition-colors hover:text-primary-400"
+                                    >
+                                        Cookie Policy
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div className="border-t border-spiritual-700 pt-8 text-center text-sm">
+                        <p>
+                            &copy; {new Date().getFullYear()} Examine. All
+                            rights reserved.
+                        </p>
+                    </div>
+                </div>
+            </footer>
         </div>
-      </section>
-
-      {/* Featured Quizzes */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-spiritual-900 mb-4">
-              Featured Quizzes
-            </h2>
-            <p className="text-lg text-spiritual-600 max-w-2xl mx-auto">
-              Start your journey with these carefully selected quizzes designed to test and improve your Islamic knowledge.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredQuizzes.map((quiz, index) => (
-              <motion.div
-                key={quiz.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <QuizCard quiz={quiz} onStart={handleStartQuiz} />
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Button variant="outline" size="lg">
-              View All Quizzes
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-primary-600 to-secondary-600">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-white">
-              Ready to Test Your Knowledge?
-            </h2>
-            <p className="text-xl text-primary-100 max-w-2xl mx-auto">
-              Join thousands of Muslims worldwide in this beautiful journey of learning and spiritual growth.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button variant="secondary" size="lg" className="bg-white text-primary-600 hover:bg-primary-50">
-                <Play className="w-5 h-5 mr-2" />
-                Start Your First Quiz
-              </Button>
-              <Button variant="ghost" size="lg" className="text-white border-white hover:bg-white/10">
-                Learn More
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </div>
-  );
+    );
 };
 
 export default Home;
