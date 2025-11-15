@@ -1,0 +1,242 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ginto Font Family */
+@font-face {
+    font-family: "Ginto";
+    src: url("../fonts/Ginto-Copilot-Upright-Variable.woff2") format("woff2");
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Ginto", sans-serif;
+    line-height: 1.6;
+    color: #1e293b;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    min-height: 100vh;
+}
+
+/* Remove default focus outlines */
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+    outline: none !important;
+    box-shadow: none;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none !important;
+}
+
+@layer components {
+    /* Input Field Styles */
+    .input-field {
+        @apply w-full px-4 py-3 rounded-xl border border-spiritual-200 bg-white/80 backdrop-blur-sm 
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 transition-all duration-300 
+           placeholder-spiritual-400 text-spiritual-900 focus:outline-none;
+    }
+
+    /* Select field specific styling */
+    select.input-field {
+        @apply appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22%239CA3AF%22%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M5.293%207.293a1%201%200%011.414%200L10%2010.586l3.293-3.293a1%201%200%011.414%201.414l-4%204a1%201%200%01-1.414%200l-4-4a1%201%200%010-1.414z%22%20clip-rule%3D%22evenodd%22/%3E%3C/svg%3E')] bg-no-repeat bg-right pr-10;
+    }
+
+    /* Button Base Styles */
+    .btn-primary {
+        @apply bg-gradient-to-r from-primary-500 to-primary-600 text-white font-medium py-3 px-6 
+           rounded-xl shadow-medium hover:shadow-strong transition-all duration-300 
+           hover:scale-105 active:scale-95 inline-flex items-center justify-center
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500/50
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+    .btn-secondary {
+        @apply bg-white text-spiritual-700 font-medium py-3 px-6 rounded-xl shadow-soft 
+           hover:shadow-medium transition-all duration-300 border border-spiritual-200 
+           hover:border-spiritual-300 inline-flex items-center justify-center
+           focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-spiritual-500/50
+           disabled:opacity-50 disabled:cursor-not-allowed;
+    }
+
+    .btn-ghost {
+        @apply text-spiritual-600 font-medium py-3 px-6 rounded-xl hover:bg-white/50 
+           transition-all duration-300;
+    }
+
+    /* Card Styles */
+    .card {
+        @apply bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-strong border border-white/20;
+    }
+
+    .quiz-card {
+        @apply bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-soft border border-white/20 card-hover;
+    }
+
+    .card-hover {
+        transition: all 0.3s ease;
+    }
+
+    .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Error Message */
+    .error-message {
+        @apply mt-1 text-sm text-error-600;
+    }
+
+    /* Success Message */
+    .success-message {
+        @apply p-3 bg-success-50 border border-success-200 rounded-xl text-success-600 text-sm;
+    }
+
+    /* Error Alert */
+    .error-alert {
+        @apply p-3 bg-error-50 border border-error-200 rounded-xl text-error-600 text-sm;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+        @apply w-full h-2 bg-spiritual-200 rounded-full overflow-hidden;
+    }
+
+    .progress-fill {
+        @apply h-full bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full 
+           transition-all duration-500 ease-out;
+    }
+}
+
+/* Utility Classes */
+.text-gradient {
+    background: linear-gradient(135deg, #0ea5e9, #d946ef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+/* Islamic Pattern Background */
+.islamic-bg {
+    background-image: radial-gradient(
+            circle at 25% 25%,
+            rgba(14, 165, 233, 0.1) 0%,
+            transparent 50%
+        ),
+        radial-gradient(
+            circle at 75% 75%,
+            rgba(217, 70, 239, 0.1) 0%,
+            transparent 50%
+        );
+}
+
+/* Animation Classes */
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* Fade In Animation */
+.animate-fadeIn {
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Top Loading Bar */
+.top-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0ea5e9 0%, #d946ef 100%);
+    box-shadow: 0 0 10px rgba(14, 165, 233, 0.8);
+    z-index: 9999;
+    transition: width 0.3s ease, opacity 0.3s ease;
+    border-radius: 0 2px 2px 0;
+}
+
+.top-loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Hide scrollbar while keeping functionality */
+.scrollbar-hide {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* Alpine.js Animations */
+[x-cloak] {
+    display: none !important;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 640px) {
+    .quiz-card {
+        @apply p-4 rounded-xl;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        @apply py-3 px-5 text-sm;
+    }
+}
