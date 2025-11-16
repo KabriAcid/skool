@@ -11,15 +11,12 @@ export interface SchoolAdminFormData {
     adminName: string;
     adminPhone: string;
     adminEmail: string;
-    schoolName: string;
-    schoolPhone: string;
-    schoolEmail: string;
     schoolState: string;
     schoolLGA: string;
     schoolAddress: string;
     numberOfStudents: number;
-    adminPassword: string;
-    adminPassword_confirmation: string;
+    password: string;
+    password_confirmation: string;
 }
 
 export interface RegistrationData {

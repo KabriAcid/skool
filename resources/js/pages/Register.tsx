@@ -77,18 +77,15 @@ export default function Register() {
             adminName: '',
             adminPhone: '',
             adminEmail: '',
-            schoolName: '',
-            schoolPhone: '',
-            schoolEmail: '',
             schoolState: '',
             schoolLGA: '',
             schoolAddress: '',
             numberOfStudents: 100,
-            adminPassword: '',
-            adminPassword_confirmation: '',
+            password: '',
+            password_confirmation: '',
         });
 
-    const totalSteps = accountType === 'student' ? 3 : 5;
+    const totalSteps = accountType === 'student' ? 3 : 4;
 
     const handleAccountTypeSelect = (type: AccountType) => {
         setAccountType(type);
@@ -178,19 +175,6 @@ export default function Register() {
                     newErrors.adminEmail = 'Please enter a valid email';
                 }
             } else if (currentStep === 2) {
-                if (!schoolAdminFormData.schoolName.trim()) {
-                    newErrors.schoolName = 'School name is required';
-                }
-                if (!schoolAdminFormData.schoolPhone.trim()) {
-                    newErrors.schoolPhone = 'School phone is required';
-                }
-                if (!schoolAdminFormData.schoolEmail) {
-                    newErrors.schoolEmail = 'School email is required';
-                } else if (
-                    !/\S+@\S+\.\S+/.test(schoolAdminFormData.schoolEmail)
-                ) {
-                    newErrors.schoolEmail = 'Please enter a valid school email';
-                }
                 if (!schoolAdminFormData.schoolState) {
                     newErrors.schoolState = 'Please select a state';
                 }
@@ -198,7 +182,6 @@ export default function Register() {
                     newErrors.schoolLGA =
                         'Please select a Local Government Area';
                 }
-            } else if (currentStep === 3) {
                 if (!schoolAdminFormData.schoolAddress.trim()) {
                     newErrors.schoolAddress = 'School address is required';
                 }
@@ -207,24 +190,23 @@ export default function Register() {
                     newErrors.numberOfStudents =
                         'Number of students must be between 10 and 10,000';
                 }
-            } else if (currentStep === 4) {
-                if (!schoolAdminFormData.adminPassword) {
-                    newErrors.adminPassword = 'Password is required';
-                } else if (schoolAdminFormData.adminPassword.length < 8) {
-                    newErrors.adminPassword =
+            } else if (currentStep === 3) {
+                if (!schoolAdminFormData.password) {
+                    newErrors.password = 'Password is required';
+                } else if (schoolAdminFormData.password.length < 8) {
+                    newErrors.password =
                         'Password must be at least 8 characters';
                 }
-                if (!schoolAdminFormData.adminPassword_confirmation) {
-                    newErrors.adminPassword_confirmation =
+                if (!schoolAdminFormData.password_confirmation) {
+                    newErrors.password_confirmation =
                         'Please confirm your password';
                 } else if (
-                    schoolAdminFormData.adminPassword !==
-                    schoolAdminFormData.adminPassword_confirmation
+                    schoolAdminFormData.password !==
+                    schoolAdminFormData.password_confirmation
                 ) {
-                    newErrors.adminPassword_confirmation =
-                        'Passwords do not match';
+                    newErrors.password_confirmation = 'Passwords do not match';
                 }
-            } else if (currentStep === 5) {
+            } else if (currentStep === 4) {
                 if (!agreeToTerms) {
                     newErrors.agreeToTerms =
                         'You must agree to the terms and conditions';
@@ -275,7 +257,6 @@ export default function Register() {
                 setRegistrationData({
                     admin_email: schoolAdminFormData.adminEmail,
                     formatted_amount: `₦${totalAmount.toLocaleString()}.00`,
-                    school_name: schoolAdminFormData.schoolName,
                     school_code: `SCH${Math.random().toString(36).substr(2, 6).toUpperCase()}`,
                     number_of_students: schoolAdminFormData.numberOfStudents,
                 });
@@ -286,17 +267,14 @@ export default function Register() {
                     account_type: 'school_admin',
                     admin_name: schoolAdminFormData.adminName,
                     admin_phone: schoolAdminFormData.adminPhone,
-                    school_name: schoolAdminFormData.schoolName,
-                    school_email: schoolAdminFormData.schoolEmail,
-                    school_phone: schoolAdminFormData.schoolPhone,
+                    admin_email: schoolAdminFormData.adminEmail,
                     school_state: schoolAdminFormData.schoolState,
                     school_lga: schoolAdminFormData.schoolLGA,
                     school_address: schoolAdminFormData.schoolAddress,
                     number_of_students: schoolAdminFormData.numberOfStudents,
-                    email: schoolAdminFormData.adminEmail,
-                    password: schoolAdminFormData.adminPassword,
+                    password: schoolAdminFormData.password,
                     password_confirmation:
-                        schoolAdminFormData.adminPassword_confirmation,
+                        schoolAdminFormData.password_confirmation,
                 });
             }
         } catch (error: any) {

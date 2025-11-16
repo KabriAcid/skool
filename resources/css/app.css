@@ -149,8 +149,21 @@ select {
 }
 
 /* Input Styles */
-.input-field, .text-area {
+.input-field,
+.text-area {
     @apply w-full rounded-xl border border-spiritual-200 bg-white/80 px-4 py-3 placeholder-spiritual-400 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
+}
+
+.input-field-icon {
+    @apply w-full rounded-xl border border-spiritual-300 bg-white/80 py-3 pl-10 pr-4 text-sm placeholder-spiritual-400 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 sm:text-base;
+}
+
+.select-field {
+    @apply w-full rounded-xl border border-spiritual-300 bg-white/80 py-3 pl-10 pr-4 text-sm outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 disabled:cursor-not-allowed disabled:opacity-50 sm:text-base;
+}
+
+.textarea-field {
+    @apply w-full resize-none rounded-xl border border-spiritual-300 bg-white/80 py-3 pl-10 pr-4 text-sm placeholder-spiritual-400 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 sm:text-base;
 }
 
 /* Card Styles */

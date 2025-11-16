@@ -11,7 +11,7 @@ interface ProgressIndicatorProps {
 const studentStepLabels = ['Account', 'Security', 'Confirm'];
 const adminStepLabels = [
     'Admin Info',
-    'School Info',
+    'School Details',
     'Address & Capacity',
     'Security',
     'Confirm',
@@ -55,7 +55,7 @@ export default function ProgressIndicator({
                             </div>
                             {step < totalSteps && (
                                 <div
-                                    className={`mx-4 h-1 flex-1 rounded transition-all duration-300 ${currentStep > step ? 'bg-success-600' : 'bg-spiritual-200'}`}
+                                    className={`mx-4 h-1 flex-1 rounded border-t-2 border-dotted transition-all duration-300 ${currentStep > step ? 'border-success-600' : 'border-spiritual-200'}`}
                                 />
                             )}
                         </div>

@@ -9,7 +9,6 @@ import {
     MapPin,
     MapPinned,
     Phone,
-    School,
     User,
     Users,
 } from 'lucide-react';
@@ -45,6 +44,7 @@ export default function SchoolAdminForm({
 
     return (
         <AnimatePresence mode="wait">
+            {/* Step 1: Admin Information */}
             {currentStep === 1 && (
                 <motion.div
                     key="step1"
@@ -59,204 +59,146 @@ export default function SchoolAdminForm({
                         </p>
                     </div>
 
-                    <div>
-                        <div className="relative">
-                            <User className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <input
-                                type="text"
-                                value={formData.adminName}
-                                onChange={(e) =>
-                                    onChange('adminName', e.target.value)
-                                }
-                                placeholder="Administrator Full Name"
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
-                                required
-                            />
+                    {/* 2x2 Grid Layout */}
+                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+                        {/* Admin Name */}
+                        <div>
+                            <div className="relative">
+                                <User className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
+                                <input
+                                    type="text"
+                                    value={formData.adminName}
+                                    onChange={(e) =>
+                                        onChange('adminName', e.target.value)
+                                    }
+                                    placeholder="Full Name"
+                                    className="input-field-icon"
+                                    required
+                                />
+                            </div>
+                            {errors.adminName && (
+                                <span className="mt-1 block text-sm text-error-600">
+                                    {errors.adminName}
+                                </span>
+                            )}
                         </div>
-                        {errors.adminName && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.adminName}
-                            </span>
-                        )}
-                    </div>
 
-                    <div>
-                        <div className="relative">
-                            <Phone className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <input
-                                type="tel"
-                                value={formData.adminPhone}
-                                onChange={(e) =>
-                                    onChange('adminPhone', e.target.value)
-                                }
-                                placeholder="Administrator Phone Number"
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
-                                required
-                            />
+                        {/* Admin Phone */}
+                        <div>
+                            <div className="relative">
+                                <Phone className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
+                                <input
+                                    type="tel"
+                                    value={formData.adminPhone}
+                                    onChange={(e) =>
+                                        onChange('adminPhone', e.target.value)
+                                    }
+                                    placeholder="Phone Number"
+                                    className="input-field-icon"
+                                    required
+                                />
+                            </div>
+                            {errors.adminPhone && (
+                                <span className="mt-1 block text-sm text-error-600">
+                                    {errors.adminPhone}
+                                </span>
+                            )}
                         </div>
-                        {errors.adminPhone && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.adminPhone}
-                            </span>
-                        )}
-                    </div>
 
-                    <div>
-                        <div className="relative">
-                            <Mail className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <input
-                                type="email"
-                                value={formData.adminEmail}
-                                onChange={(e) =>
-                                    onChange('adminEmail', e.target.value)
-                                }
-                                placeholder="Administrator Email Address"
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
-                                required
-                            />
+                        {/* Admin Email - spans full width */}
+                        <div className="sm:col-span-2">
+                            <div className="relative">
+                                <Mail className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
+                                <input
+                                    type="email"
+                                    value={formData.adminEmail}
+                                    onChange={(e) =>
+                                        onChange('adminEmail', e.target.value)
+                                    }
+                                    placeholder="Email Address"
+                                    className="input-field-icon"
+                                    required
+                                />
+                            </div>
+                            {errors.adminEmail && (
+                                <span className="mt-1 block text-sm text-error-600">
+                                    {errors.adminEmail}
+                                </span>
+                            )}
                         </div>
-                        {errors.adminEmail && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.adminEmail}
-                            </span>
-                        )}
                     </div>
                 </motion.div>
             )}
 
+            {/* Step 2: School Details */}
             {currentStep === 2 && (
                 <motion.div
                     key="step2"
                     {...fadeInScale}
                     className="space-y-4 sm:space-y-5"
                 >
-                    <div>
-                        <div className="relative">
-                            <School className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <input
-                                type="text"
-                                value={formData.schoolName}
-                                onChange={(e) =>
-                                    onChange('schoolName', e.target.value)
-                                }
-                                placeholder="School Name"
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
-                                required
-                            />
+                    {/* 2x2 Grid Layout */}
+                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+                        {/* State */}
+                        <div>
+                            <div className="relative">
+                                <MapPin className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
+                                <select
+                                    value={formData.schoolState}
+                                    onChange={(e) =>
+                                        onChange('schoolState', e.target.value)
+                                    }
+                                    className="select-field"
+                                    required
+                                >
+                                    <option value="">Select State</option>
+                                    {states.map((state) => (
+                                        <option key={state} value={state}>
+                                            {state}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            {errors.schoolState && (
+                                <span className="mt-1 block text-sm text-error-600">
+                                    {errors.schoolState}
+                                </span>
+                            )}
                         </div>
-                        {errors.schoolName && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.schoolName}
-                            </span>
-                        )}
-                    </div>
 
-                    <div>
-                        <div className="relative">
-                            <Phone className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <input
-                                type="tel"
-                                value={formData.schoolPhone}
-                                onChange={(e) =>
-                                    onChange('schoolPhone', e.target.value)
-                                }
-                                placeholder="School Phone Number"
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
-                                required
-                            />
-                        </div>
-                        {errors.schoolPhone && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.schoolPhone}
-                            </span>
-                        )}
-                    </div>
-
-                    <div>
-                        <div className="relative">
-                            <Mail className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <input
-                                type="email"
-                                value={formData.schoolEmail}
-                                onChange={(e) =>
-                                    onChange('schoolEmail', e.target.value)
-                                }
-                                placeholder="School Email Address"
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
-                                required
-                            />
-                        </div>
-                        {errors.schoolEmail && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.schoolEmail}
-                            </span>
-                        )}
-                    </div>
-
-                    <div>
-                        <div className="relative">
-                            <MapPin className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <select
-                                value={formData.schoolState}
-                                onChange={(e) =>
-                                    onChange('schoolState', e.target.value)
-                                }
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
-                                required
-                            >
-                                <option value="">Select State</option>
-                                {states.map((state) => (
-                                    <option key={state} value={state}>
-                                        {state}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        {errors.schoolState && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.schoolState}
-                            </span>
-                        )}
-                    </div>
-
-                    <div>
-                        <div className="relative">
-                            <Map className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <select
-                                value={formData.schoolLGA}
-                                onChange={(e) =>
-                                    onChange('schoolLGA', e.target.value)
-                                }
-                                disabled={!formData.schoolState}
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 disabled:cursor-not-allowed disabled:opacity-50 sm:text-base"
-                                required
-                            >
-                                <option value="">...Select LGA...</option>
-                                {formData.schoolState &&
-                                    getLGAsForState(formData.schoolState).map(
-                                        (lga) => (
+                        {/* LGA */}
+                        <div>
+                            <div className="relative">
+                                <Map className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
+                                <select
+                                    value={formData.schoolLGA}
+                                    onChange={(e) =>
+                                        onChange('schoolLGA', e.target.value)
+                                    }
+                                    disabled={!formData.schoolState}
+                                    className="select-field"
+                                    required
+                                >
+                                    <option value="">...Select LGA...</option>
+                                    {formData.schoolState &&
+                                        getLGAsForState(
+                                            formData.schoolState,
+                                        ).map((lga) => (
                                             <option key={lga} value={lga}>
                                                 {lga}
                                             </option>
-                                        ),
-                                    )}
-                            </select>
+                                        ))}
+                                </select>
+                            </div>
+                            {errors.schoolLGA && (
+                                <span className="mt-1 block text-sm text-error-600">
+                                    {errors.schoolLGA}
+                                </span>
+                            )}
                         </div>
-                        {errors.schoolLGA && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.schoolLGA}
-                            </span>
-                        )}
                     </div>
-                </motion.div>
-            )}
 
-            {currentStep === 3 && (
-                <motion.div
-                    key="step3"
-                    {...fadeInScale}
-                    className="space-y-4 sm:space-y-5"
-                >
+                    {/* Address - Full Width */}
                     <div>
                         <div className="relative">
                             <MapPinned className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
@@ -267,7 +209,7 @@ export default function SchoolAdminForm({
                                 }
                                 rows={3}
                                 placeholder="Full School Address"
-                                className="w-full resize-none rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
+                                className="textarea-field"
                                 required
                             />
                         </div>
@@ -278,6 +220,7 @@ export default function SchoolAdminForm({
                         )}
                     </div>
 
+                    {/* Number of Students */}
                     <div>
                         <div className="relative">
                             <Users className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
@@ -293,7 +236,7 @@ export default function SchoolAdminForm({
                                 min={10}
                                 max={10000}
                                 placeholder="Number of Students"
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
+                                className="input-field-icon"
                                 required
                             />
                         </div>
@@ -316,65 +259,72 @@ export default function SchoolAdminForm({
                 </motion.div>
             )}
 
-            {currentStep === 4 && (
+            {/* Step 3: Security */}
+            {currentStep === 3 && (
                 <motion.div
-                    key="step4"
+                    key="step3"
                     {...fadeInScale}
                     className="space-y-4 sm:space-y-5"
                 >
-                    <div>
-                        <div className="relative">
-                            <Lock className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <input
-                                type="password"
-                                value={formData.adminPassword}
-                                onChange={(e) =>
-                                    onChange('adminPassword', e.target.value)
-                                }
-                                placeholder="Password"
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
-                                required
-                            />
+                    {/* 2x2 Grid Layout */}
+                    <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+                        {/* Password */}
+                        <div>
+                            <div className="relative">
+                                <Lock className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
+                                <input
+                                    type="password"
+                                    value={formData.password}
+                                    onChange={(e) =>
+                                        onChange('password', e.target.value)
+                                    }
+                                    placeholder="Password"
+                                    className="input-field-icon"
+                                    required
+                                />
+                            </div>
+                            <p className="mt-1 text-xs text-spiritual-500">
+                                Min 8 characters
+                            </p>
+                            {errors.password && (
+                                <span className="mt-1 block text-sm text-error-600">
+                                    {errors.password}
+                                </span>
+                            )}
                         </div>
-                        <p className="mt-1 text-xs text-spiritual-500">
-                            Minimum 8 characters
-                        </p>
-                        {errors.adminPassword && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.adminPassword}
-                            </span>
-                        )}
-                    </div>
 
-                    <div>
-                        <div className="relative">
-                            <LockKeyhole className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
-                            <input
-                                type="password"
-                                value={formData.adminPassword_confirmation}
-                                onChange={(e) =>
-                                    onChange(
-                                        'adminPassword_confirmation',
-                                        e.target.value,
-                                    )
-                                }
-                                placeholder="Confirm Password"
-                                className="w-full rounded-xl border border-spiritual-300 py-3 pl-10 pr-4 text-sm focus:border-transparent focus:ring-2 focus:ring-primary-500 sm:text-base"
-                                required
-                            />
+                        {/* Confirm Password */}
+                        <div>
+                            <div className="relative">
+                                <LockKeyhole className="absolute left-3 top-3.5 h-5 w-5 text-spiritual-400" />
+                                <input
+                                    type="password"
+                                    value={formData.password_confirmation}
+                                    onChange={(e) =>
+                                        onChange(
+                                            'password_confirmation',
+                                            e.target.value,
+                                        )
+                                    }
+                                    placeholder="Confirm Password"
+                                    className="input-field-icon"
+                                    required
+                                />
+                            </div>
+                            {errors.password_confirmation && (
+                                <span className="mt-1 block text-sm text-error-600">
+                                    {errors.password_confirmation}
+                                </span>
+                            )}
                         </div>
-                        {errors.adminPassword_confirmation && (
-                            <span className="mt-1 block text-sm text-error-600">
-                                {errors.adminPassword_confirmation}
-                            </span>
-                        )}
                     </div>
                 </motion.div>
             )}
 
-            {currentStep === 5 && (
+            {/* Step 4: Review & Confirm */}
+            {currentStep === 4 && (
                 <motion.div
-                    key="step5"
+                    key="step4"
                     {...fadeInScale}
                     className="space-y-4 sm:space-y-6"
                 >
@@ -383,36 +333,6 @@ export default function SchoolAdminForm({
                             📋 Registration Summary
                         </h3>
                         <div className="space-y-2 text-xs sm:space-y-3 sm:text-sm">
-                            <div className="flex justify-between">
-                                <span className="font-medium">
-                                    School Name:
-                                </span>
-                                <span className="text-right">
-                                    {formData.schoolName}
-                                </span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="font-medium">
-                                    School Email:
-                                </span>
-                                <span className="text-right">
-                                    {formData.schoolEmail}
-                                </span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="font-medium">
-                                    School Phone:
-                                </span>
-                                <span className="text-right">
-                                    {formData.schoolPhone}
-                                </span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="font-medium">Location:</span>
-                                <span className="text-right">
-                                    {formData.schoolLGA}, {formData.schoolState}
-                                </span>
-                            </div>
                             <div className="flex justify-between">
                                 <span className="font-medium">
                                     Administrator:
@@ -429,7 +349,32 @@ export default function SchoolAdminForm({
                                     {formData.adminPhone}
                                 </span>
                             </div>
-                            <div className="flex items-center justify-between border-t border-primary-300 pt-2 sm:pt-3">
+                            <div className="flex justify-between">
+                                <span className="font-medium">
+                                    Admin Email:
+                                </span>
+                                <span className="text-right">
+                                    {formData.adminEmail}
+                                </span>
+                            </div>
+                            <div className="border-t border-primary-300 pt-2 sm:pt-3">
+                                <div className="flex justify-between">
+                                    <span className="font-medium">
+                                        Location:
+                                    </span>
+                                    <span className="text-right">
+                                        {formData.schoolLGA},{' '}
+                                        {formData.schoolState}
+                                    </span>
+                                </div>
+                            </div>
+                            <div className="flex justify-between">
+                                <span className="font-medium">Address:</span>
+                                <span className="text-right">
+                                    {formData.schoolAddress}
+                                </span>
+                            </div>
+                            <div className="flex items-center justify-between pt-2 sm:pt-3">
                                 <span className="font-bold">Students:</span>
                                 <span className="font-bold text-primary-600">
                                     {formData.numberOfStudents.toLocaleString()}
