@@ -14,6 +14,20 @@ Route::get('/', function () {
 })->name('home');
 
 /**
+ * Registration page
+ */
+Route::get('/register', function () {
+    return Inertia::render('register');
+})->name('register');
+
+/**
+ * Login page
+ */
+Route::get('/login', function () {
+    return Inertia::render('login');
+})->name('login');
+
+/**
  * Health check / API info endpoint
  * Direct access to :8000 shows server status only
  */
