@@ -81,7 +81,7 @@ export default function Register() {
             schoolPhone: '',
             schoolEmail: '',
             schoolState: '',
-            schoolCity: '',
+            schoolLGA: '',
             schoolAddress: '',
             numberOfStudents: 100,
             adminPassword: '',
@@ -194,8 +194,9 @@ export default function Register() {
                 if (!schoolAdminFormData.schoolState) {
                     newErrors.schoolState = 'Please select a state';
                 }
-                if (!schoolAdminFormData.schoolCity.trim()) {
-                    newErrors.schoolCity = 'City is required';
+                if (!schoolAdminFormData.schoolLGA) {
+                    newErrors.schoolLGA =
+                        'Please select a Local Government Area';
                 }
             } else if (currentStep === 3) {
                 if (!schoolAdminFormData.schoolAddress.trim()) {
@@ -289,7 +290,7 @@ export default function Register() {
                     school_email: schoolAdminFormData.schoolEmail,
                     school_phone: schoolAdminFormData.schoolPhone,
                     school_state: schoolAdminFormData.schoolState,
-                    school_city: schoolAdminFormData.schoolCity,
+                    school_lga: schoolAdminFormData.schoolLGA,
                     school_address: schoolAdminFormData.schoolAddress,
                     number_of_students: schoolAdminFormData.numberOfStudents,
                     email: schoolAdminFormData.adminEmail,
@@ -325,7 +326,7 @@ export default function Register() {
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="rounded-2xl border border-white/20 bg-white/90 p-4 shadow-strong backdrop-blur-sm sm:rounded-3xl sm:p-6 md:p-8"
+                    className="card-container"
                 >
                     {/* Header */}
                     <div className="mb-6 text-center sm:mb-8">
@@ -366,7 +367,7 @@ export default function Register() {
                                     <motion.div
                                         initial={{ opacity: 0, y: -10 }}
                                         animate={{ opacity: 1, y: 0 }}
-                                        className="rounded-xl border border-error-200 bg-error-50 p-3 text-sm text-error-600"
+                                        className="error-alert"
                                     >
                                         {errors.general}
                                     </motion.div>
@@ -441,7 +442,7 @@ export default function Register() {
                                             onClick={handlePreviousStep}
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
-                                            className="inline-flex items-center rounded-xl bg-spiritual-100 px-4 py-2 text-sm font-medium text-spiritual-700 transition-all duration-300 hover:bg-spiritual-200 sm:px-6 sm:py-3 sm:text-base"
+                                            className="btn-back"
                                         >
                                             <ArrowLeft className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                                             Back
@@ -452,7 +453,7 @@ export default function Register() {
                                             onClick={handleBackToAccountType}
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
-                                            className="inline-flex items-center rounded-xl bg-spiritual-100 px-4 py-2 text-sm font-medium text-spiritual-700 transition-all duration-300 hover:bg-spiritual-200 sm:px-6 sm:py-3 sm:text-base"
+                                            className="btn-back"
                                         >
                                             <ArrowLeft className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                                             Change Account Type
@@ -531,7 +532,7 @@ export default function Register() {
                                                     ? { scale: 0.95 }
                                                     : {}
                                             }
-                                            className="inline-flex items-center rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-3 text-sm font-medium text-white shadow-medium transition-all duration-300 hover:shadow-strong disabled:cursor-not-allowed disabled:opacity-50 sm:px-8 sm:py-3.5 sm:text-base"
+                                            className="btn-continue"
                                         >
                                             Continue
                                             <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />

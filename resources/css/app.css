@@ -49,9 +49,19 @@ body {
         -apple-system,
         sans-serif;
     line-height: 1.6;
-    color: #1e293b;
+    /* color: #1e293b; */
     background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
     min-height: 100vh;
+}
+
+select:focus,
+textarea:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+select {
+    outline: none !important;
 }
 
 /* Custom Scrollbar */
@@ -139,13 +149,31 @@ body {
 }
 
 /* Input Styles */
-.input-field {
-    @apply w-full rounded-xl border border-spiritual-200 bg-white/80 px-4 py-3 placeholder-spiritual-400 backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
+.input-field, .text-area {
+    @apply w-full rounded-xl border border-spiritual-200 bg-white/80 px-4 py-3 placeholder-spiritual-400 outline-none backdrop-blur-sm transition-all duration-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20;
 }
 
 /* Card Styles */
 .quiz-card {
     @apply card-hover rounded-2xl border border-white/20 bg-white/90 p-6 shadow-soft backdrop-blur-sm;
+}
+
+.card-container {
+    @apply rounded-2xl border border-white/20 bg-white/90 p-4 shadow-strong backdrop-blur-sm sm:rounded-3xl sm:p-6 md:p-8;
+}
+
+/* Button Styles - Secondary/Navigation */
+.btn-back {
+    @apply inline-flex items-center rounded-xl bg-spiritual-100 px-4 py-2 text-sm font-medium text-spiritual-700 transition-all duration-300 hover:bg-spiritual-200 sm:px-6 sm:py-3 sm:text-base;
+}
+
+.btn-continue {
+    @apply inline-flex items-center rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-3 text-sm font-medium text-white shadow-medium transition-all duration-300 hover:shadow-strong disabled:cursor-not-allowed disabled:opacity-50 sm:px-8 sm:py-3.5 sm:text-base;
+}
+
+/* Form Alert Styles */
+.error-alert {
+    @apply rounded-xl border border-error-200 bg-error-50 p-3 text-sm text-error-600;
 }
 
 /* Progress Bar */

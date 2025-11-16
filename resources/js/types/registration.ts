@@ -15,7 +15,7 @@ export interface SchoolAdminFormData {
     schoolPhone: string;
     schoolEmail: string;
     schoolState: string;
-    schoolCity: string;
+    schoolLGA: string;
     schoolAddress: string;
     numberOfStudents: number;
     adminPassword: string;
